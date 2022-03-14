@@ -15,7 +15,7 @@ function addItem(e){
   item.style.display = 'flex';
   item.style.justifyContent = 'space-between';
   item.style.overflowX = 'auto';
-
+  item.innerHTML = `<p>${inpValue}</p>`
   
   item.addEventListener('click', hover);
   function hover(){
@@ -23,9 +23,6 @@ function addItem(e){
     closeBtn.innerHTML = '<i class="bx bx-check-circle" style="color:#00ff00"></i>';
   }
 
-
-  let Value = document.createTextNode(inpValue);
-  item.appendChild(Value);
   let closeBtn = item.appendChild(document.createElement('button'));
 
   closeBtn.innerHTML = '<i class="bx bxs-trash-alt"></i>';
@@ -60,3 +57,24 @@ function filter(){
   }
 }
 
+
+
+let elSearch = document.getElementById('Search');
+
+elSearch.addEventListener('keyup', filterItems);
+
+function filterItems (e){
+   let text = e.target.value.toLowerCase();
+
+   let elitem = elList.getElementsByTagName("li");
+
+   for (let i = 0; i < Array.from(elitem).length; i++){
+     let itemName = elitem[i].textContent;
+     if (itemName.toLowerCase().indexOf(text) != -1){
+       elitem[i].style.display = 'flex';
+     }
+     else{
+       elitem[i].style.display = 'none';
+     }
+   }
+}
